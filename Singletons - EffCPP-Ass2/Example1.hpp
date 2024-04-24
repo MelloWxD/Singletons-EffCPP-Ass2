@@ -39,6 +39,15 @@ public:
 		std::cout << m_vLogOut[logcnt] << std::endl;
 
 	}
+
+	void printLog()
+	{
+		for (auto s : m_vLogOut)
+		{
+			std::cout << s << std::endl;
+		}
+
+	}
 private:
 	Logger() = default;
 	~Logger() = default;
@@ -65,6 +74,15 @@ public:
 		m_vLogOut.push_back(log);
 		++logcnt;
 		std::cout << m_vLogOut[logcnt] << std::endl;
+
+	}
+
+	void printLog()
+	{
+		for (auto s : m_vLogOut)
+		{
+			std::cout << s << std::endl;
+		}
 
 	}
 	TLogger() = default;
