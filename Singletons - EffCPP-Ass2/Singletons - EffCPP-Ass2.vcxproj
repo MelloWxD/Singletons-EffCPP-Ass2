@@ -130,7 +130,10 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Example1.hpp" />
+    <ClInclude Include="Framework.h" />
+    <ClInclude Include="Logger.h" />
+    <ClInclude Include="NamespaceLogger.h" />
+    <ClInclude Include="Singleton_Logger.hpp" />
     <ClInclude Include="Singleton.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

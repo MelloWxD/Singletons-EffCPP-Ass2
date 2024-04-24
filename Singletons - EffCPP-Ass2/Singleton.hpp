@@ -1,8 +1,62 @@
+#pragma once
 #include<assert.h>
 
-// by Mark Featherstone(C) 2019 All Rights Reserved.
+
 #ifndef SINGLETON_H
 #define SINGLETON_H
+/// <summary>
+///  Logger Class.
+/// This is a Simple implementation of a singleton class used for logging outputs from anywhere in the codebase
+/// </summary>
+class Simple_Singleton_imp_Logger
+{
+public:
+
+	/// <summary>
+	/// Get the instance of the Logger object.
+	/// </summary>
+	/// <returns>Logger instance</returns>
+	static Simple_Singleton_imp_Logger& Get()
+	{
+		static Simple_Singleton_imp_Logger instance;
+		return instance;
+	}
+
+	/// <summary>
+	/// Run all neccessary code before being used, this is done because the default constructor is hidden from us
+	/// </summary>
+	void init()
+	{
+		m_vLogOut.resize(0);
+		new Simple_Singleton_imp_Logger;
+	}
+
+	void printLn(std::string log)
+	{
+		m_vLogOut.push_back(log);
+		++logcnt;
+		std::cout << m_vLogOut[logcnt] << std::endl;
+
+	}
+
+	void printLog()
+	{
+		for (auto s : m_vLogOut)
+		{
+			std::cout << s << std::endl;
+		}
+
+	}
+private:
+	Simple_Singleton_imp_Logger() = default;
+	~Simple_Singleton_imp_Logger() = default;
+	std::vector<std::string> m_vLogOut;
+	int logcnt = -1;
+
+};
+
+
+// by Mark Featherstone(C) 2019 All Rights Reserved.
 
 /*
 We often want only one instance of an object, especially if we are creating manager classes
@@ -32,17 +86,16 @@ Example - in use
 
 // Written by Mark Featherstone
 // Commented Explanation by Liam Hamit
-
-template<class T> class Singleton // Templetized type allocation allowing for easy plug and play singleton instantiation of generic types/classes
+template<class T> class TSingleton // Templetized type allocation allowing for easy plug and play singleton instantiation of generic types/classes
 {
 public:
-	Singleton()				// Abstracted Constructer using RAII
+	TSingleton()				// Abstracted Constructer following RAII
 	{
 		assert(spSingleton == nullptr);
 		spSingleton = static_cast<T*>(this);
 	}
 
-	virtual ~Singleton()	// Abstracted Destructor using RAII
+	virtual ~TSingleton()	// Abstracted Destructor following RAII
 	{
 		assert(spSingleton != nullptr);
 		spSingleton = nullptr;
@@ -56,49 +109,11 @@ public:
 
 	
 private:
-	static T* spSingleton;	// 
-	Singleton(Singleton const&) = delete;
-	void operator=(Singleton const&) = delete;
+	static T* spSingleton;	// instance
+	TSingleton(TSingleton const&) = delete;	// call the constructor in private to prevent any more instances being created.
+	void operator=(TSingleton const&) = delete;
 };
 
-template<typename T> T* Singleton<T>::spSingleton = 0;
+template<typename T> T* TSingleton<T>::spSingleton = 0;	// Definition
 
 #endif
-
-//class Logger
-//{
-//public:
-//
-//	/// <summary>
-//	/// Get the instance of the Logger object.
-//	/// </summary>
-//	/// <returns>Logger instance</returns>
-//	static Logger& Get()
-//	{
-//		static Logger instance;
-//		return instance;
-//	}
-//
-//	/// <summary>
-//	/// Run all neccessary code before being used, this is done because the default constructor is hidden from us
-//	/// </summary>
-//	void init()
-//	{
-//		m_vLogOut.resize(0);
-//		new Logger;
-//	}
-//
-//	void printLn(std::string log)
-//	{
-//		m_vLogOut.push_back(log);
-//		++logcnt;
-//		std::cout << m_vLogOut[logcnt] << std::endl;
-//
-//	}
-//private:
-//	Logger() = default;
-//	~Logger() = default;
-//	std::vector<std::string> m_vLogOut;
-//	int logcnt = -1;
-//
-//};

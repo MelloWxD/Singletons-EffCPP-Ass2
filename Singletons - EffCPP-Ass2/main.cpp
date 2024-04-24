@@ -1,67 +1,27 @@
 #include<iostream>
-#include"Singleton.hpp"
-#include"Example1.hpp"
-
-
-
-
-
-
-
-
-
-
-
-
+#include"Framework.h"
 
 int main()
 {
-	std::cout << "Program Entry Point\n";
+	new TLogger; // Create instance of TLogger singleton class
 
-	
+	Logger SimpleLogger;	// Logger class instance for parsing between modules
 
-
-	Logger::Get().printLn("Logger test output"); 
-
-	new TLogger;
-
-	TLogger::Get().printLn("TLogger test output");
+	Framework* pFramework = new Framework; // Create framework instance for demonstration purposes.
 
 
-	bool exit = false;
-	while (!exit)
+
+	std::cout << ("Program Entry Point");
+
+	while (pFramework->getExitStatus() == false)
 	{
-		std::cout << "Please press a key\n1. Log a string\n2. Output debug Log\n3.Exit\n";
+		// Un-Comment the one you want to see
 
-		int Iinput = 0;
-		std::string Sinput;
+		//pFramework->updateSingletonsLoop();				// Singleton Approach demonstration of a logger class in use.
+		pFramework->updateNamspaceLoop();					// Alternative demonstration of the Namespace Approach.
+		//pFramework->updateParsedLoop(&SimpleLogger);		// Alternative demonstration of the Passing Approach.
 
-		std::cin >> Iinput;
-		switch (Iinput)
-		{
-		case 1:
-			std::cout << "Please enter the Log:\t";
-			std::cin >> Sinput;
-			Logger::Get().printLn(Sinput);
-			break;
-		case 2:
-			Logger::Get().printLog();
-			break;
-		case 3:
-			exit = true;
-			break;
-		default:
-			std::cout << "Please press a key\n1. Log a string\n2. Output debug Log\n3.Exit\n";
-			std::cin.get() >> Iinput;
-			break;
-		}
 	}
-
-
-
-
-
-
 	
 	return 0;
 }
