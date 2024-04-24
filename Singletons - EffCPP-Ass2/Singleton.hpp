@@ -48,7 +48,8 @@ public:
 		spSingleton = nullptr;
 	}
 
-	static T& Get() {		// Get function, used to return the instance of the singleton
+	static T& Get()
+	{	// Get function, used to return the instance of the singleton
 		assert(spSingleton != nullptr);
 		return *spSingleton;
 	}
@@ -63,3 +64,41 @@ private:
 template<typename T> T* Singleton<T>::spSingleton = 0;
 
 #endif
+
+//class Logger
+//{
+//public:
+//
+//	/// <summary>
+//	/// Get the instance of the Logger object.
+//	/// </summary>
+//	/// <returns>Logger instance</returns>
+//	static Logger& Get()
+//	{
+//		static Logger instance;
+//		return instance;
+//	}
+//
+//	/// <summary>
+//	/// Run all neccessary code before being used, this is done because the default constructor is hidden from us
+//	/// </summary>
+//	void init()
+//	{
+//		m_vLogOut.resize(0);
+//		new Logger;
+//	}
+//
+//	void printLn(std::string log)
+//	{
+//		m_vLogOut.push_back(log);
+//		++logcnt;
+//		std::cout << m_vLogOut[logcnt] << std::endl;
+//
+//	}
+//private:
+//	Logger() = default;
+//	~Logger() = default;
+//	std::vector<std::string> m_vLogOut;
+//	int logcnt = -1;
+//
+//};
